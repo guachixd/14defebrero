@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
-    <link rel="icon" href="hellokitty.jpg" type="image/jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Museo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500&family=Dancing+Script:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { 
@@ -19,25 +19,83 @@
             background: #1a0a0a;
         }
 
-        /* TECHO CON LUCES */
+        /* TECHO CON LUCES Y PARLANTES */
         .techo {
             background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
-            height: 50px;
+            height: 55px;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 150px;
+            gap: 120px;
             padding-bottom: 8px;
             border-bottom: 4px solid #8B0000;
             flex-shrink: 0;
+            position: relative;
         }
 
         .luz {
-            width: 70px;
-            height: 18px;
+            width: 60px;
+            height: 16px;
             background: linear-gradient(180deg, #fff8dc 0%, #ffd700 50%, #ffaa00 100%);
             border-radius: 4px;
             box-shadow: 0 0 20px #ffd700, 0 0 40px rgba(255, 215, 0, 0.5);
+        }
+
+        /* PARLANTES */
+        .parlante {
+            position: absolute;
+            top: 8px;
+            width: 45px;
+            height: 40px;
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border: 2px solid #444;
+            border-radius: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3px;
+            padding: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .parlante-izq { left: 20px; }
+        .parlante-der { right: 20px; }
+
+        .parlante-circulo {
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #333 0%, #1a1a1a 60%, #333 100%);
+            border-radius: 50%;
+            border: 1px solid #444;
+            animation: vibrar 0.1s infinite;
+        }
+
+        .parlante-circulo.grande {
+            width: 18px;
+            height: 18px;
+        }
+
+        @keyframes vibrar {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .parlante-onda {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            border-radius: 50%;
+            animation: ondas 1s infinite;
+        }
+
+        .parlante-izq .parlante-onda { right: -25px; }
+        .parlante-der .parlante-onda { left: -25px; }
+
+        @keyframes ondas {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
         }
 
         /* PARED ROJA */
@@ -52,20 +110,17 @@
         .pared::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
                 repeating-linear-gradient(45deg, transparent, transparent 25px, rgba(0,0,0,0.08) 25px, rgba(0,0,0,0.08) 50px),
                 repeating-linear-gradient(-45deg, transparent, transparent 25px, rgba(0,0,0,0.08) 25px, rgba(0,0,0,0.08) 50px);
             pointer-events: none;
         }
 
-        /* HEADER DEL MUSEO */
+        /* HEADER */
         .museo-header {
             text-align: center;
-            padding: 15px 20px;
+            padding: 10px 20px;
             position: relative;
             z-index: 10;
             flex-shrink: 0;
@@ -73,7 +128,7 @@
 
         .museo-header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #d4af37;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
             letter-spacing: 6px;
@@ -82,8 +137,8 @@
 
         .museo-header p {
             color: #f5f5dc;
-            font-size: 0.95rem;
-            margin-top: 3px;
+            font-size: 0.9rem;
+            margin-top: 2px;
             font-style: italic;
         }
 
@@ -93,8 +148,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 50px;
-            padding: 10px 20px;
+            gap: 40px;
+            padding: 5px 15px;
             position: relative;
             z-index: 10;
             min-height: 0;
@@ -109,7 +164,7 @@
 
         .cuadro {
             background: linear-gradient(145deg, #d4af37, #b8960c, #d4af37, #f0d060, #d4af37);
-            padding: 12px;
+            padding: 10px;
             border-radius: 4px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.3);
             cursor: pointer;
@@ -120,7 +175,7 @@
         .cuadro::before {
             content: '';
             position: absolute;
-            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
             border: 2px solid rgba(255,255,255,0.3);
             pointer-events: none;
         }
@@ -132,14 +187,14 @@
 
         .cuadro-interior {
             background: #1a1a1a;
-            padding: 6px;
+            padding: 5px;
             box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
 
         .cuadro img {
             display: block;
-            width: 220px;
-            height: 180px;
+            width: 200px;
+            height: 165px;
             object-fit: cover;
         }
 
@@ -147,15 +202,15 @@
             background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
             color: #d4af37;
             text-align: center;
-            padding: 8px 15px;
-            margin-top: 15px;
+            padding: 6px 12px;
+            margin-top: 12px;
             border: 2px solid #d4af37;
             font-family: 'Playfair Display', serif;
-            min-width: 150px;
+            min-width: 140px;
         }
 
         .placa h3 {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 400;
@@ -164,32 +219,35 @@
         /* SILUETAS CON GLOBOS */
         .grupo-siluetas {
             position: absolute;
-            bottom: 10px;
+            bottom: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 5;
         }
 
-        .grupo-izq { left: 8%; }
-        .grupo-der { right: 8%; }
+        .grupo-izq { left: 5%; }
+        .grupo-der { right: 5%; }
 
-        .globo {
+        /* GLOBO COMENTARIOS (izquierda) */
+        .globo-comentario {
             background: #f5f5dc;
             border: 2px solid #d4af37;
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 8px 12px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #333;
             position: relative;
             margin-bottom: 8px;
+            min-width: 100px;
             max-width: 130px;
             text-align: center;
             box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
         }
 
-        .globo::after {
+        .globo-comentario::after {
             content: '';
             position: absolute;
             bottom: -8px;
@@ -200,7 +258,7 @@
             border-color: #f5f5dc transparent transparent transparent;
         }
 
-        .globo::before {
+        .globo-comentario::before {
             content: '';
             position: absolute;
             bottom: -11px;
@@ -211,26 +269,79 @@
             border-color: #d4af37 transparent transparent transparent;
         }
 
-        .globo-cancion {
-            font-style: italic;
-            font-size: 0.75rem;
+        /* GLOBO CARTA (derecha) - MÁS GRANDE */
+        .globo-carta {
+            background: linear-gradient(180deg, #fffef0 0%, #f5f0dc 100%);
+            border: 3px solid #d4af37;
+            border-radius: 15px;
+            padding: 12px 15px;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85rem;
+            color: #5a3a1a;
+            position: relative;
+            margin-bottom: 8px;
+            width: 180px;
+            min-height: 80px;
+            text-align: center;
+            box-shadow: 3px 3px 12px rgba(0,0,0,0.4), inset 0 0 20px rgba(212,175,55,0.1);
+            line-height: 1.3;
+        }
+
+        .globo-carta::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px 8px 0 8px;
+            border-style: solid;
+            border-color: #f5f0dc transparent transparent transparent;
+        }
+
+        .globo-carta::before {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 12px 10px 0 10px;
+            border-style: solid;
+            border-color: #d4af37 transparent transparent transparent;
+        }
+
+        #carta-texto {
+            transition: opacity 0.3s ease;
         }
 
         .siluetas-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: flex-end;
         }
 
         .silueta { opacity: 0.9; }
-        .silueta-mediana { width: 28px; height: 56px; }
-        .silueta-grande { width: 34px; height: 68px; }
+        .silueta-mediana { width: 25px; height: 50px; }
+        .silueta-grande { width: 30px; height: 60px; }
         .silueta svg { width: 100%; height: 100%; }
 
-        /* PISO AJEDREZADO */
+        /* Animación de siluetas */
+        .silueta {
+            animation: balanceo 3s ease-in-out infinite;
+        }
+
+        .silueta:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes balanceo {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+        /* PISO */
         .piso {
-            height: 50px;
-            background: repeating-conic-gradient(#f5f5dc 0% 25%, #d4c4a8 0% 50%) 50% / 25px 25px;
+            height: 45px;
+            background: repeating-conic-gradient(#f5f5dc 0% 25%, #d4c4a8 0% 50%) 50% / 22px 22px;
             flex-shrink: 0;
             position: relative;
         }
@@ -242,8 +353,8 @@
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
-            background: rgba(0,0,0,0.7);
-            padding: 8px 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 6px 18px;
             border-radius: 20px;
             border: 2px solid #d4af37;
         }
@@ -251,14 +362,14 @@
         .navegacion .contador {
             color: #d4af37;
             font-family: 'Playfair Display', serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 2px;
             display: block;
         }
 
         .navegacion .instruccion {
             color: #f5f5dc;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-style: italic;
         }
 
@@ -280,27 +391,27 @@
 
         .modal-contenido {
             background: linear-gradient(145deg, #d4af37, #b8960c, #d4af37);
-            padding: 12px;
+            padding: 10px;
             border-radius: 4px;
-            max-width: 85%;
-            max-height: 65%;
+            max-width: 80%;
+            max-height: 60%;
             position: relative;
         }
 
-        .modal-interior { background: #1a1a1a; padding: 6px; }
+        .modal-interior { background: #1a1a1a; padding: 5px; }
 
         .modal img {
-            max-width: 60vw;
-            max-height: 50vh;
+            max-width: 55vw;
+            max-height: 45vh;
             object-fit: contain;
         }
 
         .modal-info {
             background: linear-gradient(180deg, #f5f5dc 0%, #e8e0c8 100%);
             border: 3px solid #d4af37;
-            padding: 15px 20px;
-            margin-top: 15px;
-            max-width: 450px;
+            padding: 12px 18px;
+            margin-top: 12px;
+            max-width: 420px;
             max-height: 22vh;
             overflow-y: auto;
             text-align: center;
@@ -310,15 +421,15 @@
         .modal-info h2 {
             color: #8B0000;
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
+            font-size: 1rem;
+            margin-bottom: 6px;
             letter-spacing: 2px;
         }
 
         .modal-info p {
             color: #333;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 0.85rem;
+            line-height: 1.4;
         }
 
         .cerrar-modal {
@@ -327,9 +438,9 @@
             background: #d4af37;
             color: #1a1a1a;
             border: none;
-            width: 30px; height: 30px;
+            width: 28px; height: 28px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             font-weight: bold;
         }
@@ -337,18 +448,19 @@
         .cerrar-modal:hover { background: #fff; }
 
         /* RESPONSIVE */
-        @media (max-height: 650px) {
-            .museo-header { padding: 10px; }
-            .museo-header h1 { font-size: 1.4rem; }
-            .cuadro img { width: 180px; height: 150px; }
+        @media (max-height: 600px) {
+            .museo-header { padding: 5px; }
+            .museo-header h1 { font-size: 1.2rem; }
+            .cuadro img { width: 160px; height: 130px; }
             .grupo-siluetas { display: none; }
             .techo { height: 40px; }
-            .piso { height: 40px; }
+            .piso { height: 35px; }
+            .parlante { display: none; }
         }
 
-        @media (max-width: 800px) {
-            .galeria { flex-direction: column; gap: 20px; overflow-y: auto; }
-            .cuadro img { width: 200px; height: 160px; }
+        @media (max-width: 850px) {
+            .galeria { flex-direction: column; gap: 15px; overflow-y: auto; }
+            .cuadro img { width: 180px; height: 145px; }
             .grupo-siluetas { display: none; }
         }
     </style>
@@ -359,28 +471,43 @@
         <source src="sound/etapa1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- TECHO -->
+    <!-- TECHO CON PARLANTES -->
     <div class="techo">
+        <!-- Parlante izquierdo -->
+        <div class="parlante parlante-izq">
+            <div class="parlante-circulo"></div>
+            <div class="parlante-circulo"></div>
+            <div class="parlante-circulo grande"></div>
+            <div class="parlante-onda"></div>
+        </div>
+
         <div class="luz"></div>
         <div class="luz"></div>
         <div class="luz"></div>
         <div class="luz"></div>
-        <div class="luz"></div>
+
+        <!-- Parlante derecho -->
+        <div class="parlante parlante-der">
+            <div class="parlante-circulo"></div>
+            <div class="parlante-circulo"></div>
+            <div class="parlante-circulo grande"></div>
+            <div class="parlante-onda"></div>
+        </div>
     </div>
 
     <!-- PARED -->
     <div class="pared">
-        <!-- Header -->
         <div class="museo-header">
-            <h1>Nuestro Museo</h1>
-            <p>Una colección de momentos inolvidables</p>
+            <h1>Museo de Valu y Sebs</h1>
+            <p>Una colección de los m,omentos mas felicdes de mi vida! / Da click en las imagenes amor</p>
         </div>
 
-        <!-- Galería -->
         <section class="galeria">
-            <!-- Siluetas izquierda -->
+            <!-- SILUETAS IZQUIERDA - Comentarios -->
             <div class="grupo-siluetas grupo-izq">
-                <div class="globo">Da click en las fotos mi vida! </div>
+                <div class="globo-comentario" id="comentario-visitantes">
+                    ¡Qué lindos! 
+                </div>
                 <div class="siluetas-row">
                     <div class="silueta silueta-mediana">
                         <svg viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
@@ -410,7 +537,7 @@
                 </div>
             </div>
 
-            <!-- Cuadros -->
+            <!-- CUADROS -->
             <div class="cuadro-container">
                 <div class="cuadro" onclick="abrirModal(0)">
                     <div class="cuadro-interior"><img id="foto-izq" src="img/foto1.jpg" alt="Momento"></div>
@@ -425,9 +552,11 @@
                 <div class="placa"><h3 id="titulo-der">Momento 2</h3></div>
             </div>
 
-            <!-- Siluetas derecha -->
+            <!-- SILUETAS DERECHA - Carta -->
             <div class="grupo-siluetas grupo-der">
-                <div class="globo globo-cancion">🎵 <span id="cancion-actual">And I Love Her</span></div>
+                <div class="globo-carta">
+                    <span id="carta-texto">Mi amor, bienvenida a nuestro museo!</span>
+                </div>
                 <div class="siluetas-row">
                     <div class="silueta silueta-grande">
                         <svg viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
@@ -484,6 +613,33 @@
         let indiceActual = 0;
         let etapaActual = 1;
 
+        // Comentarios aleatorios de los visitantes
+        const comentariosVisitantes = [
+            "¡Qué lindos! ",
+            "Hermosa obra de arte ",
+            "¡Se ven tan felices!",
+            "Qué bonita pareja ",
+            "¡Increíble! ",
+            "Amor verdadero ",
+            "¡Mira esos ojos chuecos!",
+            "Están enamorados",
+            "¡Qué tiernos esos loquetiños!",
+            "Arte puro",
+            "¡Bellísimos!",
+            "Esto es amor de farandula",
+            "¡Wow! Hermosos esos mijines",
+            "La pareja perfecta",
+            "¡Me encantan esos cholos!"
+        ];
+
+        // Carta de amor dividida por etapas
+        const cartaPorEtapa = {
+            1: "Mi vida hermosa, desde el día que te conocí supe que eras especial. Te veías hermosa con tu hoodie de los NY... Ese 1 de agosto unimos nuestras almas. 11:11 ",
+            2: "Amo cada parte de tu ser. Tu forma de reír, la manera en que me miras. Eres mi compañera en absolutamente todo. Los buenos momentos siempre fueron tu persona.",
+            3: "Contigo aprendí que el amor es una decisión. Quiero cuidarte toda mi vida. Cada momento a tu lado es magia pura, eres la luz de mi ser.",
+            4: "Te amo con toda mi alma y lo haré por siempre. Eres mi alma gemela y nunca dejarás de serlo. Feliz San Valentín mi amor -Sebastian "
+        };
+
         const canciones = {
             1: "And I Love Her",
             2: "Will I See You Again",
@@ -513,59 +669,59 @@
             { titulo: "White", descripcion: "Ese sendero y la Cait guardan las memorias más hermosas del mundo. Tu aroma y tu ser se quedaron en ese parque recordándome la belleza del vivir." },
             { titulo: "Happy Birthday", descripcion: "Ese día no pude estar contigo. Es un agradecimiento al cielo porque hayas llegado a este mundo. No tengo la gratitud necesaria a Dios por enviarme a su ángel más hermoso." },
             { titulo: "Angry cat", descripcion: "Busco el azul inconscientemente donde sea que vea, ese azul que veo en ti y tanto te gustaba. Ese gato que veo reflejado en la ventana, tu cabello recogido, ese lazo blanco. Todo tenía sentido, la vida ya no era tan fría." },
-            { titulo: "Bit", descripcion: "Gato suco, recuerdos, la comida y el verte simplemente sentada a mi lado compartiendo un momento, celebrando un mes más de novios. Extraño esas noches de complicidad y alegría que emanaban nuestras almas. 24 de mayo, gracias por hacerme sentir feliz. Muérdeme el alma, mi alma es tuya." },
+            { titulo: "Bit", descripcion: "Gato suco, recuerdos, la comida y el verte simplemente sentada a mi lado compartiendo un momento, celebrando un mes más de novios. Extraño esas noches de complicidad y alegría que emanaban nuestras almas." },
             { titulo: "Puerca", descripcion: "JAJAJA ese día fuera del local, esos cerditos casi hacen que me desmaye, ¿recuerdas? Siempre teniendo esa curiosidad de ver cualquier cosa juntos. Te amo." },
-            { titulo: "Pizza", descripcion: "Esas noches donde simplemente éramos los dos. Amo cocinar contigo, la dualidad desaparece. Me siento al compás de una canción contigo, puedo ir ciegamente bajo tus órdenes. Amo cocinar contigo, jugueteando entre los dos, sintiendo el fuego de la cocina y el calor de mi alma junto a la tuya." },
-            { titulo: "Fruques", descripcion: "Después de entrenar siempre comiendo algo que nos hacía mal. Siempre cumplías mis caprichos innecesarios. Una ensalada de frutas que nos hacía feliz y un sánduche muy desabrido, JAJAJ. Entendí que nunca fue un lugar, los buenos momentos siempre fueron tu persona." },
-            { titulo: "Angry Valu", descripcion: "JAJAJA, siempre bravísima. En las fotografías aún podía capturar la belleza de tu ser, tus ojos que me miraban con un intento de rabia y amor. Amo tomar fotografías así no te gusten. Capturo emociones, tus reacciones. Tu rostro es arte puro para mí." },
-            { titulo: "Tacos", descripcion: "Los famosos tacos de un dólar, JAJAJA. Estuvieron feísimos. Siempre comiendo chatarra luego del gimnasio. Esa compatibilidad para poder comer esas cosas juntos, esos instantes donde solo hacíamos algo íntimo, compartiendo la comida, riendo, amor. Te amo." },
+            { titulo: "Pizza", descripcion: "Esas noches donde simplemente éramos los dos. Amo cocinar contigo, la dualidad desaparece. Me siento al compás de una canción contigo." },
+            { titulo: "Fruques", descripcion: "Después de entrenar siempre comiendo algo que nos hacía mal. Entendí que nunca fue un lugar, los buenos momentos siempre fueron tu persona." },
+            { titulo: "Angry Valu", descripcion: "JAJAJA, siempre bravísima. En las fotografías aún podía capturar la belleza de tu ser. Tu rostro es arte puro para mí." },
+            { titulo: "Tacos", descripcion: "Los famosos tacos de un dólar, JAJAJA. Estuvieron feísimos. Siempre comiendo chatarra luego del gimnasio. Te amo." },
             { titulo: "Kids", descripcion: "Ojalá tenga una hija con el brillo tan único de tus ojos." },
-            { titulo: "Jacky", descripcion: "Fuiste la primera mujer y la última que conocerá a mi familia. En esa foto están las 2 mujeres que yo más amo en esta vida. Mi familia te quiere, siempre hubo un lugar para ti." },
-            { titulo: "Me voy a Cuenca", descripcion: "JAJAJ nos paramos en la tienda de Cataboom. Ese día ya tenías que volver a Cuenca. Siempre que te ibas se me hacía un hoyo en el pecho. Tu compañía es lo más puro y lo que más felicidad genera en mi ser. Esas despedidas llenas de abrazos. Extraño el calor de un abrazo tuyo..." },
-            { titulo: "Alitas", descripcion: "Esas promos de alitas los jueves cuando regresabas de Cuenca. La comida y tu compañía eran lo mejor. Compartir contigo, mi alma era feliz. Todo era azul, todo eras tú." },
-            { titulo: "Mauricia", descripcion: "Cuando te quedabas a dormir en mi casa a escondidas, la Mauricia siempre rondando. Noches de sentir que solo éramos tú y yo. Eran noches muy cortas, me sentía abrigado y seguro. 11:11 pide un deseo: pedirle a Dios que no te vayas jamás." },
-            { titulo: "Melany cheesecake", descripcion: "Ese día comimos donde la Melany. Nos reíamos mucho de lo que sea que veíamos, JAJAJ. Me acuerdo que te decía 'comamos ahí, pero luego hacemos otra cosita'. Ojalá hubiera pedido un abrazo más en esos días, uno que llene la agonía de no sentirte en estas fechas." },
+            { titulo: "Jacky", descripcion: "Fuiste la primera mujer y la última que conocerá a mi familia. En esa foto están las 2 mujeres que yo más amo en esta vida." },
+            { titulo: "Me voy a Cuenca", descripcion: "JAJAJ nos paramos en la tienda de Cataboom. Ese día ya tenías que volver a Cuenca. Extraño el calor de un abrazo tuyo..." },
+            { titulo: "Alitas", descripcion: "Esas promos de alitas los jueves cuando regresabas de Cuenca. La comida y tu compañía eran lo mejor. Todo era azul, todo eras tú." },
+            { titulo: "Mauricia", descripcion: "Cuando te quedabas a dormir en mi casa a escondidas. Noches de sentir que solo éramos tú y yo. 11:11 pide un deseo." },
+            { titulo: "Melany cheesecake", descripcion: "Ese día comimos donde la Melany. Nos reíamos mucho de lo que sea que veíamos, JAJAJ." },
             { titulo: "Lilys", descripcion: "Amaba regalarte flores donde sea que estés. En cada pétalo estaban los sentimientos que no podía gritar al aire. Siempre fuiste mi lirio singular." },
             { titulo: "Otro mes más juntos!", descripcion: "Los obsequios no eran tan importantes. Mi mayor regalo en esta vida siempre fuiste tú." },
-            { titulo: "Desayuno", descripcion: "Esas mañanas después de levantarnos, corriendo a escondidas a la cocina. Ojalá el tiempo se hubiera detenido un poco más ese día. Adoraba poder levantarme sabiendo que no necesitaba nada más que el suave tacto y fervor de los abrazos de la mujer que amaba :(" },
-            { titulo: "Rosco", descripcion: "Aún me acuerdo que no trajiste más ropa. Tenías unas Nike grises y una licra negra. Rosco corría a romperte la licra y gritabas para que te ayude. Yo me reía y me daba cuenta que nunca estuve tan enamorado como ese día. San Pedro me enseñó una parte de mí, esa parte tan feliz." },
-            { titulo: "Colada morada", descripcion: "Pelar esas frutas, hablar con tu familia, sentir esa calidez humana que tiene tu familia. Nunca me gustó esa colada y ahora siempre que la tomo no puedo dejar de pensar en ti, no puedo dejar de llorar. Ese morado tan profundo y esas frutas cortadas que tienen tantos recuerdos juntos." },
-            { titulo: "Verde", descripcion: "Esa hoodie te quedaba hermosa. Ese día fuimos al Boulevard, ¿recuerdas? Rosco ya estaba en la casa. Veía tu calidez humana cada vez que lo cargabas. Tengo esos recuerdos incrustados en el fondo de mi alma. Te voy a amar siempre, mi Valita." },
-            { titulo: "Fresas", descripcion: "Te sentías triste ese día. Sentía impotencia de no poder estar ahí para darte un abrazo. La distancia nunca fue un impedimento para olvidar un detalle. Amaba ver tus ojos brillar. Las flores y tú se quedaron permanentes en mi mente." },
-            { titulo: "Airbnb", descripcion: "Ese pequeño escape a Cuenca, sentir que estábamos casados. Yo sabía que el tiempo se estaba acabando. Compartir 24 horas contigo, sentir tu piel junto a la mía. Espero poder seguir viajando a muchos más lugares contigo." },
+            { titulo: "Desayuno", descripcion: "Esas mañanas después de levantarnos, corriendo a escondidas a la cocina. Adoraba el suave tacto y fervor de tus abrazos :(" },
+            { titulo: "Rosco", descripcion: "Aún me acuerdo que no trajiste más ropa. Rosco corría a romperte la licra y gritabas para que te ayude. Nunca estuve tan enamorado como ese día." },
+            { titulo: "Colada morada", descripcion: "Pelar esas frutas, hablar con tu familia. Ahora siempre que tomo colada no puedo dejar de pensar en ti." },
+            { titulo: "Verde", descripcion: "Esa hoodie te quedaba hermosa. Tengo esos recuerdos incrustados en el fondo de mi alma. Te voy a amar siempre, mi Valita." },
+            { titulo: "Fresas", descripcion: "Te sentías triste ese día. La distancia nunca fue un impedimento para olvidar un detalle. Amaba ver tus ojos brillar." },
+            { titulo: "Airbnb", descripcion: "Ese pequeño escape a Cuenca, sentir que estábamos casados. Compartir 24 horas contigo, sentir tu piel junto a la mía." },
             { titulo: "Luces", descripcion: "Un pasillo de luces reflejando la belleza de tu ser. Eres la luz de mi ser." },
-            { titulo: "Ramen", descripcion: "¿Te acuerdas que nos cobró un dólar menos, amor? Tenían muchísima azúcar esos jugos, pero sabes que la comida siempre sabe mejor contigo." },
+            { titulo: "Ramen", descripcion: "¿Te acuerdas que nos cobró un dólar menos, amor? La comida siempre sabe mejor contigo." },
             { titulo: "What do you mean", descripcion: "De las primeras y últimas veces que voy a bailar así, corazón. Me encanta bailar, pero que sea contigo." },
             { titulo: "Lips", descripcion: "Adoro cuando me haces así. Me siento un niño jugando. Me haces muy feliz." },
             { titulo: "3 meses", descripcion: "Que no falte un cake, son fechas muy especiales. Que nunca nos faltemos ninguno al otro en ningún mes." },
             { titulo: "You", descripcion: "Sueño con tener una hijita que tenga tus ojos chinitos. Quiero cuidarte toda mi vida." },
-            { titulo: "Car", descripcion: "Ese día fuimos a comer con mis pas. Esas tardes eran increíbles. ¿Te acuerdas que ese día botamos un pollo en un costal? JAJAJAJA" },
-            { titulo: "24 de mayo", descripcion: "La felicidad que sentías cuando manejabas, mi vida. Se sentía increíble. A veces me asustabas, pero me encantaba verte manejar, verte feliz." },
+            { titulo: "Car", descripcion: "Ese día fuimos a comer con mis pas. ¿Te acuerdas que ese día botamos un pollo en un costal? JAJAJAJA" },
+            { titulo: "24 de mayo", descripcion: "La felicidad que sentías cuando manejabas, mi vida. Me encantaba verte manejar, verte feliz." },
             { titulo: "Artes vivas", descripcion: "Compramos un bubble tea súper feo, pero te veías muy feliz con la Milu." },
             { titulo: "Happy", descripcion: "¿Recuerdas, amor, ese día? Nos tomaron una foto en las Artes Vivas, un policía. Nos veíamos felices. Te amo." },
             { titulo: "Kiss", descripcion: "Acaricia mi alma, suaviza mi ser." },
-            { titulo: "Suquita", descripcion: "Salimos con los bebés por Jipiro, caminamos demasiado, ¿recuerdas? JSJAJ el suco estaba súper malcriado. Luego tomamos colada morada. Eran los planes más increíbles, me sentía demasiado feliz. Soy una persona bendecida por tenerte aquí." },
+            { titulo: "Suquita", descripcion: "Salimos con los bebés por Jipiro, caminamos demasiado. Eran los planes más increíbles, me sentía demasiado feliz." },
             { titulo: "LA", descripcion: "Mi negrita, la quiero mucho." },
-            { titulo: "Bit love", descripcion: "Ese día estabas haciendo cookies. Son las fotos más reales, sentía todo lo que sentías por mí. Llevo marcada en la piel todo eso. Extraño sentirme así." },
-            { titulo: "White", descripcion: "Tingiris tinguis tinguis. Ese gato estaba súper grande pero súper malo ese Doriloco. Me dabas toda la cebolla. Extraño comer Doriloco contigo." },
-            { titulo: "Angry Valu", descripcion: "Tenemos que terminar de ver Stranger Things. Tu papá me dio una humita ese día. Tu familia es muy amable, me hacen sentir muy querido." },
-            { titulo: "Cake", descripcion: "Bravísima porque me ensucié la cara. Ese 1 de cada mes son una carta a lo que siento por ti. Eres mi todo, mi vida." },
-            { titulo: "Green car", descripcion: "Te veías hermosa ese día. Recuerdo que compramos la pechera de la Cait y te la pusiste. Amo tu locura y todo lo que conlleva ser tú." },
-            { titulo: "Sunset", descripcion: "Chaqueta denim, atardecer, la mujer que amo. Soy el hombre más feliz del mundo. Te fundes en el atardecer danzando entre nubes. Te miro y mis pupilas arden, pero mi corazón se abriga. Eres mi luna y mi atardecer." },
-            { titulo: "Happy birthday Ukkyo", descripcion: "Celebrar mi cumpleaños con la mujer que amo fue lo más hermoso de esta vida. Lo material se quedó atrás. Yo siempre fui feliz con un abrazo, con una sonrisa, con un simple te amo. Lo tengo todo. Llenas las grietas de mi corazón, pones una sonrisa en mi ser. Te amo." },
-            { titulo: "Buseta trip", descripcion: "Peleamos la mayoría del viaje, JAJAJ. Cada quien con sus audífonos. Te apoyabas en mi cabeza y descansabas. Sentía tu respiración y la suavidad de tu cabello, el aroma que puede volver loco a un hombre. Eres mi debilidad y mi fuerza, eres un todo para mí." },
-            { titulo: "Lights", descripcion: "La ciudad de las luces. Poder pasar esas fechas en un lugar así fue magia pura. El amor que siento por ti no es una bombilla, es un sol. No importa cuántos siglos pasen, el amor que siento por ti no dejará de brillar jamás." },
+            { titulo: "Bit love", descripcion: "Ese día estabas haciendo cookies. Son las fotos más reales. Extraño sentirme así." },
+            { titulo: "White", descripcion: "Tingiris tinguis tinguis. Ese gato estaba súper grande. Extraño comer Doriloco contigo." },
+            { titulo: "Angry Valu", descripcion: "Tenemos que terminar de ver Stranger Things. Tu familia es muy amable, me hacen sentir muy querido." },
+            { titulo: "Cake", descripcion: "Bravísima porque me ensucié la cara. Ese 1 de cada mes son una carta a lo que siento por ti. Eres mi todo." },
+            { titulo: "Green car", descripcion: "Te veías hermosa ese día. Amo tu locura y todo lo que conlleva ser tú." },
+            { titulo: "Sunset", descripcion: "Chaqueta denim, atardecer, la mujer que amo. Soy el hombre más feliz del mundo. Eres mi luna y mi atardecer." },
+            { titulo: "Happy birthday Ukkyo", descripcion: "Celebrar mi cumpleaños con la mujer que amo fue lo más hermoso de esta vida. Llenas las grietas de mi corazón. Te amo." },
+            { titulo: "Buseta trip", descripcion: "Peleamos la mayoría del viaje, JAJAJ. Sentía tu respiración y la suavidad de tu cabello. Eres mi debilidad y mi fuerza." },
+            { titulo: "Lights", descripcion: "La ciudad de las luces. El amor que siento por ti no es una bombilla, es un sol. No dejará de brillar jamás." },
             { titulo: "Happy Ukkyo", descripcion: "Y dormiremos en el cielo, te arroparé con una nube." },
-            { titulo: "Huerta Romero", descripcion: "Malísimas esas costillas a la salsa de mora. Compartimos todo. Observo la naturaleza y el sol, te tienen envidia. Con esos dos luceros que tienes como ojos, ese aroma que huele mejor que cualquier flor. Eres lo más cercano a la perfección." },
+            { titulo: "Huerta Romero", descripcion: "Malísimas esas costillas a la salsa de mora. Eres lo más cercano a la perfección." },
             { titulo: "Blue", descripcion: "Sonríe, mi vida. Esa sonrisa me hace darme cuenta lo bella que es la vida." },
-            { titulo: "Church", descripcion: "JAJAJ le choqué la camioneta a los militares del parque Santo Domingo. La misa era a las 4, ah, nunca me había ido a la misa de esa manera. Tu mami compró unos nachos y a mí me daba vergüenza pedir algo, era muy amable. También buscamos baterías para el reloj de tu mami. Estoy enamorado de ti, mi vida. Eres la niña correcta." },
-            { titulo: "Regalos", descripcion: "El mejor intercambio de regalos del mundo. Ese llavero que me diste es lo más genial de toda mi colección. Gracias por hacerme sentir especial. Tenemos que comer de nuevo atún con papitas y plátano." },
-            { titulo: "Cena de Navidad", descripcion: "Nunca voy a olvidar cuando comimos con mi familia. Todos te aprecian mucho, eres muy querida por muchas personas. Eres parte de mi mundo y me es muy grato que mi mundo te quiera de esa manera. Nunca más en la vida me voy a sentir de esta manera o hacer este tipo de cosas. Eres tú, solo tú." },
-            { titulo: "Los puntos", descripcion: "Me enseñabas tus puntos que te quedaron en la nariz y qué risa que se te vio un moquito, JAJAJ. Esas risas tan sinceras son un abrazo a mi alma." },
-            { titulo: "Último adiós", descripcion: "Nunca estuve listo para verte partir a un lugar donde no te voy a poder cuidar, mi niña de ojos cafés. Ojalá estuviera ahí contigo para poder contar chistes malos y poder ver formas en las nubes. Nunca estuve listo para verte partir, nunca estuve listo para dejarte de dar un abrazo. Nunca estuve listo :(" },
-            { titulo: "2026", descripcion: "Empecé el 2026 con la persona que más feliz me hace en esta tierra. Aún recuerdo, amor, que ese día sabías a trago, JAJAJA. Unos besos muy alcohólicos." },
+            { titulo: "Church", descripcion: "JAJAJ le choqué la camioneta a los militares. Estoy enamorado de ti, mi vida. Eres la niña correcta." },
+            { titulo: "Regalos", descripcion: "El mejor intercambio de regalos del mundo. Ese llavero que me diste es lo más genial de toda mi colección." },
+            { titulo: "Cena de Navidad", descripcion: "Nunca voy a olvidar cuando comimos con mi familia. Eres parte de mi mundo. Eres tú, solo tú." },
+            { titulo: "Los puntos", descripcion: "Me enseñabas tus puntos que te quedaron en la nariz. Esas risas tan sinceras son un abrazo a mi alma." },
+            { titulo: "Último adiós", descripcion: "Nunca estuve listo para verte partir, mi niña de ojos cafés. Nunca estuve listo :(" },
+            { titulo: "2026", descripcion: "Empecé el 2026 con la persona que más feliz me hace en esta tierra. Unos besos muy alcohólicos, JAJAJA." },
             { titulo: "Casco", descripcion: "La primera y última mujer que voy a subir en una moto. Tengo dos hobbies: las motos y amarte." },
-            { titulo: "Sonrisa", descripcion: "Tengo recuerdos plasmados en mi memoria como si fuera cocaína entre mis encías. Te amo con todo lo que tengo y eres la persona que más me importa en esta vida. Gracias por aguantar todo lo malo y agradezco firmemente a Dios por tenerte aquí. 6 gerberas significan 'estoy enamorado de ti'. Feliz 14 de febrero. Eres mi alma gemela y nunca dejarás de serlo." }
+            { titulo: "Sonrisa", descripcion: "Te amo con todo lo que tengo. 6 gerberas significan 'estoy enamorado de ti'. Feliz 14 de febrero. Eres mi alma gemela y nunca dejarás de serlo." }
         ];
 
         function obtenerEtapa(indice) {
@@ -581,8 +737,28 @@
                 const audio = document.getElementById('musica-fondo');
                 audio.src = `sound/etapa${nuevaEtapa}.mp3`;
                 audio.play();
+                // Actualizar carta
+                actualizarCarta(nuevaEtapa);
             }
-            document.getElementById('cancion-actual').textContent = canciones[etapaActual];
+        }
+
+        function actualizarCarta(etapa) {
+            const cartaElemento = document.getElementById('carta-texto');
+            cartaElemento.style.opacity = '0';
+            setTimeout(() => {
+                cartaElemento.textContent = cartaPorEtapa[etapa];
+                cartaElemento.style.opacity = '1';
+            }, 300);
+        }
+
+        function cambiarComentario() {
+            const comentario = document.getElementById('comentario-visitantes');
+            const randomComentario = comentariosVisitantes[Math.floor(Math.random() * comentariosVisitantes.length)];
+            comentario.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                comentario.textContent = randomComentario;
+                comentario.style.transform = 'scale(1)';
+            }, 150);
         }
 
         function actualizarFotos() {
@@ -609,7 +785,9 @@
 
             const nuevaEtapa = obtenerEtapa(indiceActual);
             cambiarMusica(nuevaEtapa);
-            document.getElementById('cancion-actual').textContent = canciones[nuevaEtapa];
+            
+            // Cambiar comentario de visitantes
+            cambiarComentario();
         }
 
         function navegar(direccion) {
@@ -643,7 +821,9 @@
             if (e.target === this) cerrarModal();
         });
 
+        // Iniciar
         actualizarFotos();
+        actualizarCarta(1);
 
         document.addEventListener('click', function iniciarMusica() {
             document.getElementById('musica-fondo').play();
